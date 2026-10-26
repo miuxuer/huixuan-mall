@@ -1,0 +1,7 @@
+hm:
+  db:
+    host: mysql
+    pw: 123
+  nacos:
+    username: nacos
+    password: nacos

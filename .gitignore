@@ -1,0 +1,52 @@
+# ========== Maven 构建产物 ==========
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ========== 日志 ==========
+# 匹配根目录和各子模块下的 logs/（hm-service/logs、item-service/logs、logs/...）
+logs/
+*.log
+*.log.*
+*.gz
+
+# ========== IntelliJ IDEA ==========
+.idea/
+*.iml
+*.iws
+out/
+
+# ========== Eclipse / STS ==========
+.settings/
+.project
+.classpath
+.springBeans
+.sts4-cache
+
+# ========== VS Code ==========
+.vscode/
+
+# ========== 编译产物 ==========
+*.class
+*.war
+*.ear
+*.nar
+
+# ========== 临时文件 ==========
+*.tmp
+*.bak
+*.swp
+*~
+*.orig
+*.rej
+
+# ========== 操作系统 ==========
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========== 本地环境配置（明文密码 + 本机 IP，按需保留本段）==========
+# 说明：application.yaml 里 profiles.active=dev，本地调试才用 -local，
+# 这些文件带着 root/123456 和 192.168.100.128，需要提交到仓库时删掉下面三行即可。
+application-local.yaml
+application-local.yml
+application-local.properties

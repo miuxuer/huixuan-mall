@@ -1,0 +1,34 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: pay-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.100.128:8848
+      username: nacos
+      password: nacos
+      config:
+        file-extension: yaml
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+
+
+  config:
+    import:
+      - optional:nacos:shared-jdbc.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-log.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-swagger.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-rabbitmq.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+
+
+hm:
+  db:
+    database: hm-pay
+  swagger:
+    package: com.huixuan.pay.controller

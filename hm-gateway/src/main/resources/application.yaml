@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.100.128:8848
+      username: nacos
+      password: nacos
+      config:
+        file-extension: yaml
+
+  config:
+    import:
+      - optional:nacos:shared-log.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+hm:
+  jwt:
+    location: classpath:hmall.jks
+    alias: hmall
+    password: hmall123
+    tokenTTL: 30m
+  auth:
+    excludePaths:
+      - /search/**
+      - /users/login
+      - /items/**
+      - /hi

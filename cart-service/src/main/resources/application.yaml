@@ -1,0 +1,48 @@
+server:
+  port: 8082
+  tomcat:
+    threads:
+      max: 25
+    max-connections: 100
+    accept-count: 25
+
+spring:
+  application:
+    name: cart-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.100.128:8848
+      username: nacos
+      password: nacos
+      config:
+        file-extension: yaml
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+    sentinel:
+      transport:
+        dashboard: localhost:8090  # sentinel控制台地址
+      http-method-specify: true  # 设置请求方式作为资源名称
+      enabled: true
+
+  config:
+    import:
+      - optional:nacos:cart-service.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-jdbc.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-log.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-swagger.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-seata.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+
+feign:
+  sentinel:
+    enabled: true # 开启服务降级
+
+hm:
+  db:
+    database: hm-cart
+  swagger:
+    package: com.huixuan.cart.controller
+

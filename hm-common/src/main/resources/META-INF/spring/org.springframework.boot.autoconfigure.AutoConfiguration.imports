@@ -1,0 +1,4 @@
+com.huixuan.common.config.MyBatisConfig
+com.huixuan.common.config.JsonConfig
+com.huixuan.common.config.MvcConfig
+com.huixuan.common.config.MqConfig

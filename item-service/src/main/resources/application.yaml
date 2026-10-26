@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: item-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.100.128:8848
+      username: nacos
+      password: nacos
+      config:
+        file-extension: yaml
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+
+  config:
+    import:
+      - optional:nacos:shared-jdbc.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-log.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-swagger.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+      - optional:nacos:shared-seata.yaml?group=DEFAULT_GROUP&refreshEnabled=true
+
+
+hm:
+  db:
+    database: hm-item
+  swagger:
+    package: com.huixuan.item.controller
+  es:
+    # dev 环境服务都跑在 es-net 网络里，直接用容器名；本地调试在 application-local.yaml 里覆盖成虚拟机 IP
+    addr: http://es:9200
